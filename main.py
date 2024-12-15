@@ -2,7 +2,7 @@ from fastapi import FastAPI, Form, Request
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from database.db_connection import get_db_connection
+# from database.db_connection import get_db_connection
 from fastapi.templating import Jinja2Templates
 
 app = FastAPI()
