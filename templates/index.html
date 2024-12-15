@@ -3,13 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" href="/static/styles.css">
+    <title>Admin Login - Pizza Delivery</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/index.css">
 </head>
 <body>
-    <h1>Welcome to Pizza Ordering System</h1>
-    <nav>
-        <a href="/menu">Menu</a> | <a href="/order">Order</a>
-    </nav>
+    <div class="container login-container">
+        <div class="login-card">
+            <!-- Logo and Title -->
+            <div class="logo-container">
+                <i class="fas fa-pizza-slice"></i>
+                <h4>Pizza Delivery Admin</h4>
+                <p>Please login to continue</p>
+            </div>
+
+            <!-- Alert Messages -->
+            <div class="alert alert-danger" role="alert" id="errorAlert">
+                <i class="fas fa-exclamation-circle me-2"></i>
+                <span id="errorMessage">Invalid credentials</span>
+            </div>
+
+            <div class="alert alert-success" role="alert" id="successAlert">
+                <i class="fas fa-check-circle me-2"></i>
+                <span>Login successful! Redirecting...</span>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" novalidate>
+                <!-- Username Input -->
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="username" placeholder="Username" required>
+                    <label for="username">Username</label>
+                    <div class="invalid-feedback">
+                        Please enter your username
+                    </div>
+                </div>
+
+                <!-- Password Input -->
+                <div class="form-floating position-relative">
+                    <input type="password" class="form-control" id="password" placeholder="Password" required>
+                    <label for="password">Password</label>
+                    <button type="button" class="password-toggle" id="passwordToggle">
+                        <i class="far fa-eye"></i>
+                    </button>
+                    <div class="invalid-feedback">
+                        Please enter your password
+                    </div>
+                </div>
+
+                <!-- Remember Me Checkbox -->
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="rememberMe">
+                    <label class="form-check-label" for="rememberMe">
+                        Remember me
+                    </label>
+                </div>
+
+                <!-- Login Button -->
+                <button type="submit" class="btn btn-danger btn-login">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    Login
+                </button>
+            </form>
+
+            <!-- Forgot Password Link -->
+            <div class="forgot-password">
+                <a href="#" id="forgotPassword">Forgot Password?</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="/static/index.css"></script>
 </body>
 </html>

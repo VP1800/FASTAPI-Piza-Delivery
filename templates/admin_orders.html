@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders - Pizza Delivery Admin</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <!-- Main container -->
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-2 col-sm-3 col-xl-2 px-0 bg-dark sidebar">
+                <div class="position-sticky">
+                    <div class="p-3">
+                        <a href="admin_dashboard.html" class="d-flex align-items-center mb-3 mb-md-0 text-white text-decoration-none">
+                            <i class="fas fa-pizza-slice fs-4 me-2"></i>
+                            <span class="fs-4 d-none d-sm-inline">Pizza Admin</span>
+                        </a>
+                    </div>
+                    
+                    <ul class="nav flex-column mb-auto">
+                        <li class="nav-item">
+                            <a href="admin_dashboard.html" class="nav-link">
+                                <i class="fas fa-tachometer-alt me-2"></i>
+                                <span class="d-none d-sm-inline">Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="admin_orders.html" class="nav-link active">
+                                <i class="fas fa-shopping-cart me-2"></i>
+                                <span class="d-none d-sm-inline">Orders</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="admin_products.html" class="nav-link">
+                                <i class="fas fa-pizza-slice me-2"></i>
+                                <span class="d-none d-sm-inline">Products</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="customers.html" class="nav-link">
+                                <i class="fas fa-users me-2"></i>
+                                <span class="d-none d-sm-inline">Customers</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="delivery.html" class="nav-link">
+                                <i class="fas fa-motorcycle me-2"></i>
+                                <span class="d-none d-sm-inline">Delivery</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Main content -->
+            <div class="col-10 col-sm-9 col-xl-10 px-0 main-content">
+                <!-- Top navbar -->
+                <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+                    <div class="container-fluid">
+                        <button class="btn btn-link d-md-none" id="sidebarToggle" type="button">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                    <i class="fas fa-user-circle me-1"></i>
+                                    Admin
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Profile</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Settings</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+
+                <!-- Main content area -->
+                <div class="container-fluid p-4">
+                    <div class="row mb-4">
+                        <div class="col-12 d-flex justify-content-between align-items-center">
+                            <h2>Orders</h2>
+                            <button class="btn btn-primary">
+                                <i class="fas fa-plus me-2"></i>New Order
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Order Filters -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-3">
+                                            <input type="text" class="form-control" placeholder="Search orders...">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <select class="form-select">
+                                                <option value="">Status</option>
+                                                <option value="pending">Pending</option>
+                                                <option value="preparing">Preparing</option>
+                                                <option value="delivering">Out for Delivery</option>
+                                                <option value="delivered">Delivered</option>
+                                                <option value="cancelled">Cancelled</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <input type="date" class="form-control">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <button class="btn btn-secondary w-100">
+                                                <i class="fas fa-filter me-2"></i>Apply Filters
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Orders Table -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Order ID</th>
+                                            <th>Customer</th>
+                                            <th>Items</th>
+                                            <th>Total</th>
+                                            <th>Status</th>
+                                            <th>Date</th>
+                                            <th>Time</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>#ORD-001</td>
+                                            <td>John Doe</td>
+                                            <td>2x Pepperoni, 1x Margherita</td>
+                                            <td>$45.98</td>
+                                            <td>
+                                                <span class="badge bg-warning">Preparing</span>
+                                            </td>
+                                            <td>10:30 AM</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-info me-2">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-success me-2">
+                                                    <i class="fas fa-check"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-danger">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>#ORD-002</td>
+                                            <td>Jane Smith</td>
+                                            <td>1x Hawaiian, 1x BBQ Chicken</td>
+                                            <td>$38.99</td>
+                                            <td>
+                                                <span class="badge bg-primary">Pending</span>
+                                            </td>
+                                            <td>10:45 AM</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-info me-2">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-success me-2">
+                                                    <i class="fas fa-check"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-danger">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <!-- Add more rows as needed -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="/static/js/admin_orders.js"></script>
+</body>
+</html>
