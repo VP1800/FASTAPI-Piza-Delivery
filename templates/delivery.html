@@ -1,4 +1,175 @@
-add staff
-list(id, name, status, delivery status)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Pizza Delivery Admin</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    
 
-copy the page admin_orders.html for reference as add option and list is present copy the design
+    <!-- Main container -->
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-2 col-sm-3 col-xl-2 px-0 bg-dark sidebar">
+                <div class="position-sticky">
+                    <div class="p-3">
+                        <a href="/admin_dashboard" class="d-flex align-items-center mb-3 mb-md-0 text-white text-decoration-none">
+                            <i class="fas fa-pizza-slice fs-4 me-2"></i>
+                            <span class="fs-4 d-none d-sm-inline">Pizza Admin</span>
+                        </a>
+                    </div>
+                    
+                    <ul class="nav flex-column mb-auto">
+                        <li class="nav-item">
+                            <a href="/admin_dashboard" class="nav-link text-white">
+                                <i class="fas fa-tachometer-alt me-2"></i>
+                                <span class="d-none d-sm-inline">Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/admin_orders" class="nav-link text-white">
+                                <i class="fas fa-shopping-cart me-2"></i>
+                                <span class="d-none d-sm-inline">Orders</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/admin_products" class="nav-link active bg-danger">
+                                <i class="fas fa-pizza-slice me-2"></i>
+                                <span class="d-none d-sm-inline">Products</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/customers" class="nav-link text-white">
+                                <i class="fas fa-users me-2"></i>
+                                <span class="d-none d-sm-inline">Customers</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/delivery" class="nav-link text-white">
+                                <i class="fas fa-motorcycle me-2"></i>
+                                <span class="d-none d-sm-inline">Delivery</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Main content -->
+            <div class="col-10 col-sm-9 col-xl-10 px-0 main-content">
+                <!-- Top navbar -->
+                <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+                    <div class="container-fluid">
+                        <button class="btn btn-link d-md-none" id="sidebarToggle" type="button">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                    <i class="fas fa-user-circle me-1"></i>
+                                    Admin
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Profile</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Settings</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="#" id="logoutBtn">
+                                        <i class="fas fa-sign-out-alt me-2"></i>Logout</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+
+                <!-- Main content area -->
+                <div class="container-fluid p-4">
+                    <!-- Header with action buttons -->
+                    <div class="row mb-4">
+                        <div class="col-12 d-flex justify-content-between align-items-center">
+                            <h2>Products</h2>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-outline-secondary" id="exportBtn">
+                                    <i class="fas fa-download me-2"></i>Export
+                                </button>
+                                <button class="btn btn-primary" id="addProductBtn">
+                                    <i class="fas fa-plus me-2"></i>Add Product
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Filters -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-3">
+                                            <input type="text" class="form-control" id="searchInput" placeholder="Search products...">
+                                        </div>
+                                        <div class="col-md-2">
+                                            <select class="form-select" id="categoryFilter">
+                                                <option value="">All Categories</option>
+                                                <option value="pizza">Pizza</option>
+                                                <option value="sides">Sides</option>
+                                                <option value="beverages">Beverages</option>
+                                                <option value="desserts">Desserts</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <select class="form-select" id="statusFilter">
+                                                <option value="">All Status</option>
+                                                <option value="active">Active</option>
+                                                <option value="inactive">Inactive</option>
+                                                <option value="out-of-stock">Out of Stock</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <select class="form-select" id="sortFilter">
+                                                <option value="name-asc">Name (A-Z)</option>
+                                                <option value="name-desc">Name (Z-A)</option>
+                                                <option value="price-asc">Price (Low-High)</option>
+                                                <option value="price-desc">Price (High-Low)</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button class="btn btn-secondary w-100" id="filterBtn">
+                                                <i class="fas fa-filter me-2"></i>Apply
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Products Grid -->
+                    <div class="row" id="productsGrid">
+                        <!-- Products will be dynamically inserted here -->
+                    </div>
+
+                    <!-- Pagination -->
+                    <nav aria-label="Product pagination" class="mt-4">
+                        <ul class="pagination justify-content-center" id="pagination">
+                            <!-- Pagination will be dynamically inserted here -->
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JavaScript -->
+    <!-- <script src="/static/js/admin_products.js"></script> -->
+</body>
+</html>
