@@ -60,6 +60,40 @@ async def login(
         cursor.close()
         connection.close()
 
+@app.get("/dashboard-data")
+async def get_dashboard_data():
+    connection = get_db_connection()
+    if not connection:
+        return JSONResponse(content={"error": "Database connection failed"}, status_code=500)
+
+    try:
+        cursor = connection.cursor(dictionary=True)
+
+        # Fetch total orders
+        cursor.execute("SELECT COUNT(*) AS total_orders FROM tbl_order")
+        total_orders = cursor.fetchone()["total_orders"]
+
+        # Fetch total revenue
+        cursor.execute("SELECT SUM(total) AS revenue FROM tbl_order")
+        revenue = cursor.fetchone()["revenue"] or 0
+
+        # Fetch pending orders
+        cursor.execute("SELECT COUNT(*) AS pending_orders FROM tbl_order WHERE status != 'Delivered'")
+        pending_orders = cursor.fetchone()["pending_orders"]
+
+        # Fetch total customers
+        cursor.execute("SELECT COUNT(DISTINCT u_id) AS customers FROM tbl_user")
+        customers = cursor.fetchone()["customers"]
+
+        return {
+            "total_orders": total_orders,
+            "revenue": revenue,
+            "pending_orders": pending_orders,
+            "customers": customers,
+        }
+    finally:
+        cursor.close()
+        connection.close()
 
 @app.get("/admin_dashboard", response_class=HTMLResponse)
 async def admin_dashboard(request: Request):

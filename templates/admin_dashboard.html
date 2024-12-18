@@ -99,7 +99,7 @@
                                     <div class="card bg-primary text-white">
                                         <div class="card-body">
                                             <h5 class="card-title">Total Orders</h5>
-                                            <h2 class="card-text">0</h2>
+                                            <h2 class="card-text" id="total-orders">Loading...</h2>
                                         </div>
                                     </div>
                                 </div>
@@ -107,7 +107,7 @@
                                     <div class="card bg-success text-white">
                                         <div class="card-body">
                                             <h5 class="card-title">Revenue</h5>
-                                            <h2 class="card-text">$0</h2>
+                                            <h2 class="card-text" id="revenue">Loading...</h2>
                                         </div>
                                     </div>
                                 </div>
@@ -115,7 +115,7 @@
                                     <div class="card bg-warning text-white">
                                         <div class="card-body">
                                             <h5 class="card-title">Pending Orders</h5>
-                                            <h2 class="card-text">0</h2>
+                                            <h2 class="card-text" id="pending-orders">Loading...</h2>
                                         </div>
                                     </div>
                                 </div>
@@ -123,7 +123,7 @@
                                     <div class="card bg-info text-white">
                                         <div class="card-body">
                                             <h5 class="card-title">Customers</h5>
-                                            <h2 class="card-text">0</h2>
+                                            <h2 class="card-text" id="customers">Loading...</h2>
                                         </div>
                                     </div>
                                 </div>
@@ -131,6 +131,19 @@
                         </div>
                     </div>
                 </div>
+                
+                <script>
+                    async function fetchDashboardData() {
+                        const response = await fetch('/dashboard-data');
+                        const data = await response.json();
+                        document.getElementById('total-orders').innerText = data.total_orders;
+                        document.getElementById('revenue').innerText = `₹${data.revenue}`;
+                        document.getElementById('pending-orders').innerText = data.pending_orders;
+                        document.getElementById('customers').innerText = data.customers;
+                    }
+                    fetchDashboardData();
+                </script>
+                
             </div>
         </div>
     </div>
