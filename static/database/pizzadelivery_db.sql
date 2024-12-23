@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 15, 2024 at 06:23 PM
+-- Generation Time: Dec 21, 2024 at 08:27 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -122,15 +122,16 @@ CREATE TABLE `tbl_user` (
   `status` varchar(50) NOT NULL DEFAULT 'active',
   `delivery_add` varchar(255) DEFAULT NULL,
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tbl_user`
 --
 
-INSERT INTO `tbl_user` (`u_id`, `mail`, `phone`, `address`, `type`, `status`, `delivery_add`, `updated_at`, `created_at`) VALUES
-(1, 'admin@gmail.com', '9382711345', 'Sangli', 'admin', 'active', NULL, '2024-12-15 17:09:09', '2024-12-15 17:09:09');
+INSERT INTO `tbl_user` (`u_id`, `mail`, `phone`, `address`, `type`, `status`, `delivery_add`, `updated_at`, `created_at`, `password`) VALUES
+(1, 'admin@gmail.com', '9382711345', 'Sangli', 'admin', 'active', NULL, '2024-12-15 17:09:09', '2024-12-15 17:09:09', '');
 
 --
 -- Indexes for dumped tables
